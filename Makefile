@@ -3,7 +3,7 @@ LIBS=$(shell)
 OBJS=$(patsubst src/%.cpp, obj/%.o, $(wildcard src/*.cpp))
 NAME=toidua
 
-CC?=gcc
+CXX?=g++
 
 install: folders bin/$(NAME)
 	sudo cp bin/$(NAME) /usr/bin/$(NAME)
@@ -13,10 +13,10 @@ folders:
 	if [ ! -d "obj" ]; then mkdir obj; fi
 
 bin/$(NAME): $(OBJS)
-	$(CC) $(wildcard obj/*.o) -o $@ $(LIBS)
+	$(CXX) $(wildcard obj/*.o) -o $@ $(LIBS)
 
 obj/%.o: src/%.cpp $(wildcard src/*.h)
-	$(CC) -c $< -o $@ $(CFLAGS)
+	$(CXX) -c $< -o $@ $(CFLAGS)
 
 run: bin/$(NAME)
 	chmod u+x bin/$(NAME)

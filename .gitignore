@@ -34,3 +34,6 @@
 # Folders
 bin/
 obj/
+
+# Drawing
+*.xcf
