@@ -1,17 +1,17 @@
-# To-Idua: a TODO list like Idea-manager:TM: (lol) for the command line.
+# To-Idua: a TODO list like Idea-manager:tm: (lol) for the command line.
 
 ## Installation
 ### Requirements
 - g++ (installed with gcc)
 - [nlohmann/json](https://github/nlohmann/json)
-###Unix:
+### Unix:
 ```bash
 git clone https://htps://github.com/Mr-Owllers/To-Idua
 cd To-Idua
 make install
 make clean
 ```
-Windows:
+### Windows:
 ```
 git clone https://htps://github.com/Mr-Owllers/To-Idua
 cd To-Idua
@@ -24,11 +24,11 @@ nothing much yet i havent finished it
 ```
 
 ## Uninstallation
-Unix:
+### Unix:
 ```bash
 make uninstall
 ```
-Windows:
+### Windows:
 ```
 uninstall
 ```
