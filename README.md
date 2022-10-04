@@ -12,11 +12,11 @@ make install
 make clean
 ```
 ### Windows:
-> NOTE- Run terminal as administrator
+> NOTE- Run terminal as administrator, also the bat file might not add the path to the environment variables, so you might have to do that manually. 
 ```
 git clone https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
-install
+install.bat
 ```
 
 ## Usage
@@ -42,7 +42,7 @@ make uninstall
 ```
 ### Windows:
 ```
-uninstall
+uninstall.bat
 ```
 
 ## License
