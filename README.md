@@ -6,14 +6,14 @@
 - [nlohmann/json](https://github.com/nlohmann/json)
 ### Unix:
 ```bash
-git clone https://https://github.com/Mr-Owllers/To-Idua
+git clone https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
 make install
 make clean
 ```
 ### Windows:
 ```
-git clone https://https://github.com/Mr-Owllers/To-Idua
+git clone https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
 install
 ```
