@@ -23,7 +23,10 @@ const std::string date() {
 int main(int argc, char** argv) {
     if (argc > 1){
         if (std::string(argv[1]) == "help"){
-            std::cout << "To-Idua\n-------------------\nhelp - shows this page\nlist - lists your ideas" << std::endl;
+            std::cout << BBLU "To-Idua:\n" << RESET
+            << "help - shows this page\nlist - lists your ideas\nadd \"name\" \"note\" - adds an idea\nremove <id> - removes an idea\nstatus <id> \"open\" || \"in progress\" || \"done\" - changes status of an idea"
+            << std::endl;
+            std::cout << BBLU << "\nExamples:\n" << RESET <<"toidua list\ntoidua add \"This is an idea\" \"Idea description\"\ntoidua remove 11\ntoidua status 11 \"done\" " << std::endl;
         }
         else if (std::string(argv[1]) == "list"){
             // check if file exists
@@ -49,7 +52,7 @@ int main(int argc, char** argv) {
                             std::cout << BBLU << "+" << RESET << "  Status: " << BRED << "OPEN" << RESET << std::endl;
                         }
                         std::cout << BBLU << "+" << RESET << "  Note: " << element["description"] << std::endl;
-                        std::cout << BBLU << "+" << RESET << "  Date: " << BLKB <<element["date"] << RESET << std::endl;
+                        std::cout << BBLU << "+" << RESET << "  Date: " << element["date"] << std::endl;
                     }
                 }
             }
