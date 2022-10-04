@@ -20,7 +20,18 @@ install
 
 ## Usage
 ```bash
-nothing much yet i havent finished it
+To-Idua:
+help - shows this page
+list - lists your ideas
+add "name" "note" - adds an idea
+remove <id> - removes an idea
+status <id> "open" || "in progress" || "done" - changes status of an idea
+
+Examples:
+toidua list
+toidua add "This is an idea" "Idea description"
+toidua remove 11
+toidua status 11 "done"
 ```
 
 ## Uninstallation
