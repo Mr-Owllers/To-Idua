@@ -12,6 +12,7 @@ make install
 make clean
 ```
 ### Windows:
+> NOTE- Run terminal as administrator
 ```
 git clone https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
