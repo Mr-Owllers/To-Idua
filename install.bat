@@ -7,7 +7,7 @@ IF NOT EXIST obj\ (
     MKDIR obj
 )
 
-g++ src\main.cpp -o .\obj\toidua.o
+g++ src\to-idua.cpp -o .\obj\toidua.o
 g++ obj\toidua.o -o .\bin\toidua.exe
 ECHO cloning into "C:\Program Files\toidua"
 
