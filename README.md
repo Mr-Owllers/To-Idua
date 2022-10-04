@@ -3,17 +3,17 @@
 ## Installation
 ### Requirements
 - g++ (installed with gcc)
-- [nlohmann/json](https://github/nlohmann/json)
+- [nlohmann/json](https://github.com/nlohmann/json)
 ### Unix:
 ```bash
-git clone https://htps://github.com/Mr-Owllers/To-Idua
+git clone https://https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
 make install
 make clean
 ```
 ### Windows:
 ```
-git clone https://htps://github.com/Mr-Owllers/To-Idua
+git clone https://https://github.com/Mr-Owllers/To-Idua
 cd To-Idua
 install
 ```
