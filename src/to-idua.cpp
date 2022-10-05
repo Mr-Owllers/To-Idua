@@ -24,6 +24,8 @@ const std::string date() {
 
 
 int main(int argc, char** argv) {
+	fs::create_directory(fs::path(fileDir));
+
     if(ARG_EXISTS(argc, 1)) {
 		const std::string argOne = std::string(argv[1]);
 
