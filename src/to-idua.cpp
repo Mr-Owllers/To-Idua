@@ -5,7 +5,10 @@
 #include "COLOUR.hpp"
 #include <time.h>
 #include <fstream>
+
 using json = nlohmann::json;
+
+#define ARG_EXISTS(argc, index) (index < argc)
 
 const std::string date() {
     time_t     now = time(0);
@@ -21,14 +24,16 @@ const std::string date() {
 
 
 int main(int argc, char** argv) {
-    if (argc > 1){
-        if (std::string(argv[1]) == "help"){
-            std::cout << BBLU "To-Idua:\n" << RESET
-            << "help - shows this page\nlist - lists your ideas\nadd \"name\" \"note\" - adds an idea\nremove <id> - removes an idea\nstatus <id> \"open\" || \"in progress\" || \"done\" - changes status of an idea"
-            << std::endl;
-            std::cout << BBLU << "\nExamples:\n" << RESET <<"toidua list\ntoidua add \"This is an idea\" \"Idea description\"\ntoidua remove 11\ntoidua status 11 \"done\" " << std::endl;
+    if(ARG_EXISTS(argc, 1)) {
+		const std::string argOne = std::string(argv[1]);
+
+        if (argOne == "help"){
+            std::cout << BBLU "To-Idua:\n" RESET
+            "help - shows this page\nlist - lists your ideas\nadd \"name\" \"note\" - adds an idea\nremove <id> - removes an idea\nstatus <id> \"open\" || \"in progress\" || \"done\" - changes status of an idea"
+            "\n";
+            std::cout << BBLU "\nExamples:\n" RESET "toidua list\ntoidua add \"This is an idea\" \"Idea description\"\ntoidua remove 11\ntoidua status 11 \"done\" " << std::endl;
         }
-        else if (std::string(argv[1]) == "list"){
+        else if (argOne == "list"){
             // check if file exists
             if (FILE_EXISTS(PATH)){
                 std::ifstream i(PATH);
@@ -41,38 +46,40 @@ int main(int argc, char** argv) {
                 else {
                     std::cout << BBLU << "Ideas:" << RESET << std::endl;
                     for (auto& element : j["ideas"]) {
-                        std::cout << element["id"] << " - " << element["idea"] << std::endl;
+                        std::cout << element["id"] << " - " << element["idea"] << '\n';
                         if (element["status"] == "done"){
-                            std::cout << BBLU << "+" << RESET << "  Status: " << BGRN << "DONE" << RESET << std::endl;
+                            std::cout << BBLU << "+" << RESET << "  Status: " << BGRN "DONE" RESET "\n";
                         }
                         else if (element["status"] == "in progress"){
-                            std::cout << BBLU << "+" << RESET << "  Status: " << BYEL << "IN PROGRESS" << RESET << std::endl;
+                            std::cout << BBLU "+" RESET "  Status: " BYEL "IN PROGRESS" RESET "\n";
                         }
                         else if (element["status"] == "open"){
-                            std::cout << BBLU << "+" << RESET << "  Status: " << BRED << "OPEN" << RESET << std::endl;
+                            std::cout << BBLU "+" RESET "  Status: " BRED "OPEN" RESET "\n";
                         }
-                        std::cout << BBLU << "+" << RESET << "  Note: " << element["description"] << std::endl;
-                        std::cout << BBLU << "+" << RESET << "  Date: " << element["date"] << std::endl;
+                        std::cout << BBLU "+" RESET "  Note: " << element["description"] << '\n';
+                        std::cout << BBLU "+" RESET "  Date: " << element["date"] << '\n';
                     }
+
+					std::flush(std::cout);
                 }
             }
             else {
-                std::cout << BRED << PATH << " does not exist. add an idea to create it" << RESET << std::endl;
+                std::cout << BRED << PATH << " does not exist. add an idea to create it" RESET << std::endl;
             }
         }
-        else if (std::string(argv[1]) == "path"){
+        else if (argOne== "path"){
             std::cout << PATH << std::endl;
         }
         // check if argv[1] = "add" then add argv[2] as idea to file and rest in qoutes as description
-        else if (std::string(argv[1]) == "add"){
+        else if (argOne == "add"){
             // check if argv[2] is empty
-            if (argv[2] == NULL){
-                std::cout << BRED << "Please enter an idea" << RESET << std::endl;
+            if (!ARG_EXISTS(argc, 2)){
+                std::cerr << BRED "Please enter an idea" RESET << std::endl;
             }
             else {
                 // check if argv[3] is empty
-                if (argv[3] == NULL){
-                    std::cout << BRED "Please enter a description" << RESET << std::endl;
+                if (!ARG_EXISTS(argc, 3)){
+                    std::cerr << BRED "Please enter a description" RESET << std::endl;
                 }
                 else {
                     
@@ -113,10 +120,10 @@ int main(int argc, char** argv) {
             }
         }
         // check if argv[1] = "remove" then remove the index that matches argv[2]
-        else if (std::string(argv[1]) == "remove"){
+        else if (argOne == "remove"){
             // check if argv[2] is empty
-            if (argv[2] == NULL){
-                std::cout << BRED << "Please enter an idea id" << RESET << std::endl;
+            if (!ARG_EXISTS(argc, 2)){
+                std::cerr << BRED "Please enter an idea id" RESET << std::endl;
             }
             else {
                 // check if index is a number
@@ -139,28 +146,28 @@ int main(int argc, char** argv) {
                             out << std::setw(4) << idea << std::endl;
                         }
                         else {
-                            std::cout << BRED << "Index does not exist" << RESET << std::endl;
+                            std::cerr << BRED "Index does not exist" RESET << std::endl;
                         }
                     }
                     else {
-                        std::cout << BRED << "File does not exist" << RESET << std::endl;
+                        std::cerr << BRED "File does not exist" RESET << std::endl;
                     }
                 }
                 else {
-                    std::cout << BRED << "Please enter a number" << RESET << std::endl;
+                    std::cerr << BRED "Please enter a number" RESET << std::endl;
                 }
             }
         }
         // check if argv[1] = "status" then change the status of the index that matches argv[2] to argv[3]
-        else if (std::string(argv[1]) == "status"){
+        else if (argOne == "status"){
             // check if argv[2] is empty
-            if (argv[2] == NULL){
-                std::cout << BRED << "Please enter an idea id" << RESET << std::endl;
+            if (!ARG_EXISTS(argc, 2)){
+                std::cerr << BRED "Please enter an idea id" RESET << std::endl;
             }
             else {
                 // check if argv[3] is empty
-                if (argv[3] == NULL){
-                    std::cout << BRED << "Please enter a status" << RESET << std::endl;
+                if (!ARG_EXISTS(argc, 3)){
+                    std::cerr << BRED "Please enter a status" RESET << std::endl;
                 }
                 else {
                     // check if index is a number
@@ -181,29 +188,29 @@ int main(int argc, char** argv) {
                                     out << std::setw(4) << idea << std::endl;
                                 }
                                 else {
-                                    std::cout << BRED << "Please enter a valid status" << RESET << std::endl;
+                                    std::cerr << BRED "Please enter a valid status" RESET << std::endl;
                                 }
                             }
                             else {
-                                std::cout << BRED << "Index does not exist" << RESET << std::endl;
+                                std::cerr << BRED "Index does not exist" RESET << std::endl;
                             }
                         }
                         else {
-                            std::cout << BRED << "File does not exist" << RESET << std::endl;
+                            std::cerr << BRED "File does not exist" RESET << std::endl;
                         }
                     }
                     else {
-                        std::cout << BRED << "Please enter a number" << RESET << std::endl;
+                        std::cerr << BRED "Please enter a number" RESET << std::endl;
                     }
                 }
             }
         }
         else {
-            std::cout << BRED << "3RR0R 404:Command Not Found. Use \"toidua help\" for help" << RESET << std::endl;
+            std::cerr << BRED "3RR0R 404:Command Not Found. Use \"toidua help\" for help" RESET << std::endl;
         }
     }
     if (argc == 1){
-        std::cout << BRED << "Please enter \"toidua help\" for help" << RESET << std::endl;
+        std::cerr << BRED "Please enter \"toidua help\" for help" RESET << std::endl;
     }
     return 0;
 }
