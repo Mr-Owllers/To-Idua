@@ -1,5 +1,5 @@
 CFLAGS=$(shell)
-LIBS=$(shell)
+LIBS=$(shell) -lstdc++fs
 OBJS=$(patsubst src/%.cpp, obj/%.o, $(wildcard src/*.cpp))
 NAME=toidua
 
